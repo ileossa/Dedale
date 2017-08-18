@@ -23,6 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".imagePicker.ImagePickerActivity"></activity>
         <activity android:name=".gallery.Gallerie"></activity>
         <activity android:name=".gallery.CustomGridView"></activity>
         <activity android:name=".gallery.cutomGridView.SingleImageActivity"></activity>

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Babar</string>
+    <string name="change_image">Change image</string>
+    <string name="gallery_imageview">gallery image view</string>
 </resources>

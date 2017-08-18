@@ -8,6 +8,7 @@ import android.widget.Button;
 
 import babar.application.ileossa.babar.gallery.CustomGridView;
 import babar.application.ileossa.babar.gallery.Gallerie;
+import babar.application.ileossa.babar.imagePicker.ImagePickerActivity;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -31,6 +32,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent galleryIntent = new Intent(MainActivity.this, CustomGridView.class);
+                startActivity(galleryIntent);
+            }
+        });
+
+        Button showImagePicker = (Button) findViewById(R.id.btn_show_picker_image);
+        showImagePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent galleryIntent = new Intent(MainActivity.this, ImagePickerActivity.class);
                 startActivity(galleryIntent);
             }
         });

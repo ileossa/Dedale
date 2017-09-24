@@ -9,6 +9,7 @@ import android.widget.Button;
 import babar.application.ileossa.babar.gallery.CustomGridView;
 import babar.application.ileossa.babar.gallery.Gallerie;
 import babar.application.ileossa.babar.imagePicker.ImagePickerActivity;
+import babar.application.ileossa.babar.shareData.ShareIntent;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -44,6 +45,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(galleryIntent);
             }
         });
+
+
+        Button showShareIntent = (Button) findViewById(R.id.btn_show_share_intent);
+        showShareIntent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent galleryIntent = new Intent(MainActivity.this, ShareIntent.class);
+                startActivity(galleryIntent);
+            }
+        });
+
 
 
     }

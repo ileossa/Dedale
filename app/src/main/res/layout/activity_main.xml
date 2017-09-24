@@ -19,7 +19,25 @@
 
     <Button
         android:id="@+id/btn_show_picker_image"
-        android:text="Show custom View"
+        android:text="Show picker image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btn_show_share_intent"
+        android:text="Show share with intent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btn_show_upload_image"
+        android:text="Upload image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btn_show_camera"
+        android:text="Take photo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

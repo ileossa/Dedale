@@ -39,19 +39,22 @@ dependencies {
 
     // check url integration glide+OkkHTTP  : https://github.com/bumptech/glide/wiki/Integration-Libraries
     // okhttp 3
-    compile 'com.github.bumptech.glide:okhttp3-integration:1.4.0@aar'
-    compile 'com.squareup.okhttp3:okhttp:3.8.1'
+//    compile 'com.github.bumptech.glide:okhttp3-integration:1.4.0@aar'
+//    compile 'com.squareup.okhttp3:okhttp:3.8.1'
 
     // okhttp 2
-    compile 'com.github.bumptech.glide:okhttp-integration:1.4.0@aar'
-    compile 'com.squareup.okhttp:okhttp:2.4.0'
+//    compile 'com.github.bumptech.glide:okhttp-integration:1.4.0@aar'
+//    compile 'com.squareup.okhttp:okhttp:2.4.0'
 
     // Pour avoir une belle progress bar
     compile 'com.github.tibolte:elasticdownload:1.0.+'
 
     // Pour les requêtes vers le serveur
-    compile 'com.squareup.okhttp:okhttp:2.4.0'
+//    compile 'com.squareup.okhttp:okhttp:2.4.0'
 
     // Pour choisir un fichier depuis Android
     compile 'com.nononsenseapps:filepicker:2.1'
+
+    // OkHttp 3 de se tuto (https://howtoprogram.xyz/2016/11/21/upload-file-okhttp/)
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
 }

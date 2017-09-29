@@ -3,17 +3,23 @@ package babar.application.ileossa.babar.gallery;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
 import babar.application.ileossa.babar.R;
+import babar.application.ileossa.babar.camera.PhotoIntentActivity;
+import babar.application.ileossa.babar.uploadGallery.UploadGalleryMainActivity;
 
 
 /**
@@ -22,11 +28,39 @@ import babar.application.ileossa.babar.R;
 
 public class SpaceGalleryActivity extends AppCompatActivity{
 
+    public BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+//                    mTextMessage.setText(R.string.title_gallery);
+//                    startActivity(new Intent(SpaceGalleryActivity.this, SpaceGalleryActivity.class));
+                    return true;
+                case R.id.navigation_dashboard:
+//                    mTextMessage.setText(R.string.title_camera);
+                    startActivity(new Intent(SpaceGalleryActivity.this, PhotoIntentActivity.class));
+                    return true;
+                case R.id.navigation_notifications:
+//                    mTextMessage.setText(R.string.title_upload);
+                    startActivity(new Intent(SpaceGalleryActivity.this, UploadGalleryMainActivity.class));
+                    return true;
+            }
+            return false;
+        }
+
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gallery_activity_spacec_gallery);
+
+        //menu bottom
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_images);

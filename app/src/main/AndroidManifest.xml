@@ -23,20 +23,20 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        android:theme="@style/AppThemeNoTittleBar">
+        <activity android:name=".gallery.SpaceGalleryActivity"  android:theme="@style/AppThemeNoTittleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".gallery.SpaceGalleryActivity" />
-        <activity android:name=".gallery.SpacePhotoActivity" />
-        <activity android:name=".shareData.ShareIntent" />
-        <activity android:name=".camera.PhotoIntentActivity" />
-        <activity android:name=".uploadGallery.UploadGalleryMainActivity">
+        <activity android:name=".MainActivity" android:theme="@style/AppThemeNoTittleBar" />
+        <activity android:name=".HomeActivity" android:theme="@style/AppThemeNoTittleBar" />
+        <activity android:name=".gallery.SpacePhotoActivity" android:theme="@style/AppThemeNoTittleBar" />
+        <activity android:name=".shareData.ShareIntent" android:theme="@style/AppThemeNoTittleBar" />
+        <activity android:name=".camera.PhotoIntentActivity" android:theme="@style/AppThemeNoTittleBar" />
+        <activity android:name=".uploadGallery.UploadGalleryMainActivity" android:theme="@style/AppThemeNoTittleBar">
             <intent-filter>
                 <!-- Intent filter action for receiving multiple images  -->
                 <action android:name="android.intent.action.SEND_MULTIPLE" />
@@ -46,7 +46,7 @@
                 <data android:mimeType="image/*" />
             </intent-filter>
         </activity>
-        <activity android:name=".uploadGallery.CustomGallery_Activity" />
+        <activity android:name=".uploadGallery.CustomGallery_Activity" android:theme="@style/AppThemeNoTittleBar" />
 
     </application>
 </manifest>

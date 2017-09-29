@@ -10,6 +10,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -21,24 +22,30 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
+
+        compile 'com.android.support:appcompat-v7:25.3.1'
+        compile 'com.android.support.constraint:constraint-layout:1.0.2'
+        testCompile 'junit:junit:4.12'
+
     })
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    testCompile 'junit:junit:4.12'
 
-    // Glide
-    compile 'com.github.bumptech.glide:glide:3.7.0'
+        compile 'com.android.support:design:25+'
+        compile 'com.android.support:support-vector-drawable:25.3.1'
 
-    // Recyclerview
-    compile 'com.android.support:recyclerview-v7:25.1.1'
+        // Glide
+        compile 'com.github.bumptech.glide:glide:3.7.0'
 
-    // palette
-    compile 'com.android.support:palette-v7:25.1.1'
+        // Recyclerview
+        compile 'com.android.support:recyclerview-v7:25.1.1'
 
-    // check url integration glide+OkkHTTP  : https://github.com/bumptech/glide/wiki/Integration-Libraries
-    // okhttp 3
+        // palette
+        compile 'com.android.support:palette-v7:25.1.1'
+
+        // check url integration glide+OkkHTTP  : https://github.com/bumptech/glide/wiki/Integration-Libraries
+        // okhttp 3
 //    compile 'com.github.bumptech.glide:okhttp3-integration:1.4.0@aar'
 //    compile 'com.squareup.okhttp3:okhttp:3.8.1'
 
@@ -46,15 +53,27 @@ dependencies {
 //    compile 'com.github.bumptech.glide:okhttp-integration:1.4.0@aar'
 //    compile 'com.squareup.okhttp:okhttp:2.4.0'
 
-    // Pour avoir une belle progress bar
-    compile 'com.github.tibolte:elasticdownload:1.0.+'
+        // Pour avoir une belle progress bar
+        compile 'com.github.tibolte:elasticdownload:1.0.+'
 
-    // Pour les requêtes vers le serveur
+        // Pour les requêtes vers le serveur
 //    compile 'com.squareup.okhttp:okhttp:2.4.0'
 
-    // Pour choisir un fichier depuis Android
-    compile 'com.nononsenseapps:filepicker:2.1'
+        // Pour choisir un fichier depuis Android
+        compile 'com.nononsenseapps:filepicker:2.1'
 
-    // OkHttp 3 de se tuto (https://howtoprogram.xyz/2016/11/21/upload-file-okhttp/)
-    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+        // OkHttp 3 de se tuto (https://howtoprogram.xyz/2016/11/21/upload-file-okhttp/)
+        compile 'com.squareup.okhttp3:okhttp:3.4.1'
+
+        // Pour la communication json
+        compile 'com.squareup.retrofit:retrofit:1.9.0'
+
+        // Pour utiliser le qrcode on as besoin d'un play service de google
+        compile 'com.google.android.gms:play-services:9.4.0+'
+
+        // Pour la gallerie
+        compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+
+
+
 }

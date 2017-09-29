@@ -26,7 +26,7 @@ public class SpaceGalleryActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_spacec_gallery);
+        setContentView(R.layout.gallery_activity_spacec_gallery);
 
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_images);
@@ -47,7 +47,7 @@ public class SpaceGalleryActivity extends AppCompatActivity{
             LayoutInflater inflater = LayoutInflater.from(context);
 
             // Inflate the layout
-            View photoView = inflater.inflate(R.layout.item_photo, parent, false);
+            View photoView = inflater.inflate(R.layout.gallery_item_photo, parent, false);
 
             ImageGalleryAdapter.MyViewHolder viewHolder = new ImageGalleryAdapter.MyViewHolder(photoView);
             return viewHolder;

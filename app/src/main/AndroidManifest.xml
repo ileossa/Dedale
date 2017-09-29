@@ -32,9 +32,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".HomeActivity" />
-        <activity android:name=".gallery.Gallerie" />
-        <activity android:name=".gallery.CustomGridView" />
-        <activity android:name=".gallery.cutomGridView.SingleImageActivity" />
+        <activity android:name=".gallery.SpaceGalleryActivity" />
+        <activity android:name=".gallery.SpacePhotoActivity" />
         <activity android:name=".shareData.ShareIntent" />
         <activity android:name=".camera.PhotoIntentActivity" />
         <activity android:name=".uploadGallery.UploadGalleryMainActivity">

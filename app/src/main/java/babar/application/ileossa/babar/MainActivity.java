@@ -7,8 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import babar.application.ileossa.babar.camera.PhotoIntentActivity;
-import babar.application.ileossa.babar.gallery.CustomGridView;
-import babar.application.ileossa.babar.gallery.Gallerie;
+import babar.application.ileossa.babar.gallery.SpaceGalleryActivity;
 import babar.application.ileossa.babar.shareData.ShareIntent;
 
 
@@ -23,20 +22,11 @@ public class MainActivity extends AppCompatActivity {
         showGalleryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent galleryIntent = new Intent(MainActivity.this, Gallerie.class);
+                Intent galleryIntent = new Intent(MainActivity.this, SpaceGalleryActivity.class);
                 startActivity(galleryIntent);
             }
         });
 
-
-        Button showCustomView = (Button) findViewById(R.id.btn_show_custom_view);
-        showCustomView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent galleryIntent = new Intent(MainActivity.this, CustomGridView.class);
-                startActivity(galleryIntent);
-            }
-        });
 
 
         Button showShareIntent = (Button) findViewById(R.id.btn_show_share_intent);

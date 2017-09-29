@@ -13,7 +13,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 
-import glide.babar.application.ileossa.glide.R;
+import babar.application.ileossa.babar.R;
+
 
 /**
  * Created by ileossa on 16/08/2017.
@@ -28,7 +29,7 @@ public class SpacePhotoActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_photo_detail);
+        setContentView(R.layout.gallery_activity_photo_detail);
 
         mImageView = (ImageView) findViewById(R.id.image);
         SpacePhoto spacePhoto = getIntent().getParcelableExtra(EXTRA_SPACE_PHOTO);

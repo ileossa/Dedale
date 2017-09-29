@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -18,13 +19,14 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import babar.application.ileossa.babar.R;
+import babar.application.ileossa.babar.gallery.SpaceGalleryActivity;
 
 
 public class UploadGalleryMainActivity extends AppCompatActivity implements View.OnClickListener {
+
+
     private static Button openCustomGallery;
     private static GridView selectedImageGridView;
 
@@ -35,22 +37,13 @@ public class UploadGalleryMainActivity extends AppCompatActivity implements View
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.upload_activity_main);
+
         initImageLoader(getApplicationContext());
         initViews();
         setListeners();
         getSharedImages();
     }
 
-    //Init all views
-    private void initViews() {
-        openCustomGallery = (Button) findViewById(R.id.openCustomGallery);
-        selectedImageGridView = (GridView) findViewById(R.id.selectedImagesGridView);
-    }
-
-    //set Listeners
-    private void setListeners() {
-        openCustomGallery.setOnClickListener(this);
-    }
 
     @Override
     public void onClick(View view) {
@@ -60,25 +53,56 @@ public class UploadGalleryMainActivity extends AppCompatActivity implements View
                 startActivityForResult(new Intent(UploadGalleryMainActivity.this, CustomGallery_Activity.class), CustomGallerySelectId);
                 break;
         }
-
     }
 
 
+    //get actual path of uri
+    public String getPath(Uri uri) {
+        String[] projection = {MediaStore.Images.Media.DATA};
+        Cursor cursor = managedQuery(uri, projection, null, null, null);
+        startManagingCursor(cursor);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
+    }
 
+
+    //Initiate Image Loader Configuration
+    public static void initImageLoader(Context context) {
+        ImageLoaderConfiguration.Builder config = new ImageLoaderConfiguration.Builder(
+                context);
+        config.threadPriority(Thread.NORM_PRIORITY - 2);
+        config.denyCacheImageMultipleSizesInMemory();
+        config.diskCacheFileNameGenerator(new Md5FileNameGenerator());
+        config.diskCacheSize(50 * 1024 * 1024); // 50 MiB
+        config.tasksProcessingOrder(QueueProcessingType.LIFO);
+        config.writeDebugLogs(); // Remove for release app
+
+        // Initialize ImageLoader with configuration.
+        ImageLoader.getInstance().init(config.build());
+
+    }
+
+    // Call when i return from gallery picker
     protected void onActivityResult(int requestcode, int resultcode,
                                     Intent imagereturnintent) {
         super.onActivityResult(requestcode, resultcode, imagereturnintent);
-        switch (requestcode) {
-            case CustomGallerySelectId:
-                if (resultcode == RESULT_OK) {
-                    String imagesArray = imagereturnintent.getStringExtra(CustomGalleryIntentKey);//get Intent data
-                    //Convert string array into List by splitting by ',' and substring after '[' and before ']'
-                    List<String> selectedImages = Arrays.asList(imagesArray.substring(1, imagesArray.length() - 1).split(", "));
-                    loadGridView(new ArrayList<String>(selectedImages));//call load gridview method by passing converted list into arrayList
-                }
-                break;
-
+        if(requestcode > 0){
+            Toast.makeText(UploadGalleryMainActivity.this, "Upload complet", Toast.LENGTH_LONG).show();
+            startActivity(new Intent(UploadGalleryMainActivity.this, SpaceGalleryActivity.class));
         }
+        // if i can show all image selected uncommet
+//        switch (requestcode) {
+//            case CustomGallerySelectId:
+//                if (resultcode == RESULT_OK) {
+//                    String imagesArray = imagereturnintent.getStringExtra(CustomGalleryIntentKey);//get Intent data
+//                    //Convert string array into List by splitting by ',' and substring after '[' and before ']'
+//                    List<String> selectedImages = Arrays.asList(imagesArray.substring(1, imagesArray.length() - 1).split(", "));
+//                    loadGridView(new ArrayList<String>(selectedImages));//call load gridview method by passing converted list into arrayList
+//                }
+//                break;
+//
+//        }
     }
 
     //Load GridView
@@ -107,32 +131,15 @@ public class UploadGalleryMainActivity extends AppCompatActivity implements View
     }
 
 
-
-    //get actual path of uri
-    public String getPath(Uri uri) {
-        String[] projection = {MediaStore.Images.Media.DATA};
-        Cursor cursor = managedQuery(uri, projection, null, null, null);
-        startManagingCursor(cursor);
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();
-        return cursor.getString(column_index);
+    //Init all views
+    private void initViews() {
+        openCustomGallery = (Button) findViewById(R.id.openCustomGallery);
+        selectedImageGridView = (GridView) findViewById(R.id.selectedImagesGridView);
     }
 
-
-    //Initiate Image Loader Configuration
-    public static void initImageLoader(Context context) {
-        ImageLoaderConfiguration.Builder config = new ImageLoaderConfiguration.Builder(
-                context);
-        config.threadPriority(Thread.NORM_PRIORITY - 2);
-        config.denyCacheImageMultipleSizesInMemory();
-        config.diskCacheFileNameGenerator(new Md5FileNameGenerator());
-        config.diskCacheSize(50 * 1024 * 1024); // 50 MiB
-        config.tasksProcessingOrder(QueueProcessingType.LIFO);
-        config.writeDebugLogs(); // Remove for release app
-
-        // Initialize ImageLoader with configuration.
-        ImageLoader.getInstance().init(config.build());
-
+    //set Listeners
+    private void setListeners() {
+        openCustomGallery.setOnClickListener(this);
     }
 
 }

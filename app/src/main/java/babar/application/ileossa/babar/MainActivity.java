@@ -6,9 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import babar.application.ileossa.babar.camera.PhotoIntentActivity;
+import babar.application.ileossa.babar.galleriemultipickerImage.MainActivityPicker;
 import babar.application.ileossa.babar.gallery.CustomGridView;
 import babar.application.ileossa.babar.gallery.Gallerie;
-import babar.application.ileossa.babar.imagePicker.ImagePickerActivity;
 import babar.application.ileossa.babar.shareData.ShareIntent;
 
 
@@ -37,15 +38,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button showImagePicker = (Button) findViewById(R.id.btn_show_picker_image);
-        showImagePicker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent galleryIntent = new Intent(MainActivity.this, ImagePickerActivity.class);
-                startActivity(galleryIntent);
-            }
-        });
-
 
         Button showShareIntent = (Button) findViewById(R.id.btn_show_share_intent);
         showShareIntent.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +49,34 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        Button showCameraIntent = (Button) findViewById(R.id.btn_show_camera_intent);
+        showCameraIntent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent cameraActivity = new Intent(MainActivity.this, PhotoIntentActivity.class);
+                startActivity(cameraActivity);
+            }
+        });
+
+
+        Button multiPicker = (Button) findViewById(R.id.btn_show_multi_picker);
+        multiPicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent multiPickerA = new Intent(MainActivity.this, MainActivityPicker.class);
+                startActivity(multiPickerA);
+            }
+        });
+
+
+        Button homeActivity = (Button) findViewById(R.id.btn_show_home_activity);
+        homeActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent homeA = new Intent(MainActivity.this, HomeActivity.class);
+                startActivity(homeA);
+            }
+        });
 
     }
 }

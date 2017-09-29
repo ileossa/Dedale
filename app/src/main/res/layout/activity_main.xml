@@ -18,28 +18,31 @@
         android:layout_height="wrap_content"/>
 
     <Button
-        android:id="@+id/btn_show_picker_image"
-        android:text="Show picker image"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <Button
         android:id="@+id/btn_show_share_intent"
         android:text="Show share with intent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <Button
-        android:id="@+id/btn_show_upload_image"
-        android:text="Upload image"
+        android:id="@+id/btn_show_camera_intent"
+        android:text="Photo with intent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <Button
-        android:id="@+id/btn_show_camera"
-        android:text="Take photo"
+        android:id="@+id/btn_show_multi_picker"
+        android:text="multi picker gallerie"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+
+    <Button
+        android:id="@+id/btn_show_home_activity"
+        android:text="New interface"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
 
 
 </LinearLayout>

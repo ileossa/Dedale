@@ -16,7 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.VideoView;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -139,7 +139,7 @@ public class PhotoIntentActivity extends Activity {
         this.sendBroadcast(mediaScanIntent);
     }
 
-    private void dispatchTakePictureIntent(int actionCode) {
+    protected void dispatchTakePictureIntent(int actionCode) {
 
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
@@ -244,6 +244,8 @@ public class PhotoIntentActivity extends Activity {
         } else {
             mAlbumStorageDirFactory = new BaseAlbumDirFactory();
         }
+        // TODO vincent
+        dispatchTakePictureIntent(ACTION_TAKE_PHOTO_B);
     }
 
     @Override

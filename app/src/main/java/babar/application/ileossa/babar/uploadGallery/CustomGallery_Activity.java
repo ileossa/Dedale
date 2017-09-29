@@ -65,8 +65,6 @@ public class CustomGallery_Activity extends AppCompatActivity implements View.On
             galleryImageUrls.add(imagecursor.getString(dataColumnIndex));//get Image from column index
             System.out.println("Array path" + galleryImageUrls.get(i));
         }
-
-
     }
 
     //Set Up GridView method

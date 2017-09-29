@@ -30,13 +30,6 @@
         android:layout_height="wrap_content"/>
 
     <Button
-        android:id="@+id/btn_show_multi_picker"
-        android:text="multi picker gallerie"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-
-    <Button
         android:id="@+id/btn_show_home_activity"
         android:text="New interface"
         android:layout_width="match_parent"

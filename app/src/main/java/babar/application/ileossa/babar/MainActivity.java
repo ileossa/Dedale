@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 
 import babar.application.ileossa.babar.camera.PhotoIntentActivity;
-import babar.application.ileossa.babar.galleriemultipickerImage.MainActivityPicker;
 import babar.application.ileossa.babar.gallery.CustomGridView;
 import babar.application.ileossa.babar.gallery.Gallerie;
 import babar.application.ileossa.babar.shareData.ShareIntent;
@@ -28,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(galleryIntent);
             }
         });
+
 
         Button showCustomView = (Button) findViewById(R.id.btn_show_custom_view);
         showCustomView.setOnClickListener(new View.OnClickListener() {
@@ -55,16 +55,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent cameraActivity = new Intent(MainActivity.this, PhotoIntentActivity.class);
                 startActivity(cameraActivity);
-            }
-        });
-
-
-        Button multiPicker = (Button) findViewById(R.id.btn_show_multi_picker);
-        multiPicker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent multiPickerA = new Intent(MainActivity.this, MainActivityPicker.class);
-                startActivity(multiPickerA);
             }
         });
 

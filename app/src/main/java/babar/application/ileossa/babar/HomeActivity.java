@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import babar.application.ileossa.babar.camera.PhotoIntentActivity;
+import babar.application.ileossa.babar.gallery.SpaceGalleryActivity;
 import babar.application.ileossa.babar.uploadGallery.UploadGalleryMainActivity;
 
 public class HomeActivity extends AppCompatActivity {
@@ -23,7 +24,7 @@ public class HomeActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
 //                    mTextMessage.setText(R.string.title_gallery);
-                    startActivity(new Intent(HomeActivity.this, UploadGalleryMainActivity.class));
+                    startActivity(new Intent(HomeActivity.this, SpaceGalleryActivity.class));
                     return true;
                 case R.id.navigation_dashboard:
 //                    mTextMessage.setText(R.string.title_camera);
@@ -53,3 +54,19 @@ public class HomeActivity extends AppCompatActivity {
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

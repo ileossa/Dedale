@@ -32,7 +32,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" android:theme="@style/AppThemeNoTittleBar" />
-        <activity android:name=".HomeActivity" android:theme="@style/AppThemeNoTittleBar" />
         <activity android:name=".gallery.SpacePhotoActivity" android:theme="@style/AppThemeNoTittleBar" />
         <activity android:name=".shareData.ShareIntent" android:theme="@style/AppThemeNoTittleBar" />
         <activity android:name=".camera.PhotoIntentActivity" android:theme="@style/AppThemeNoTittleBar" />

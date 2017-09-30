@@ -1,6 +1,8 @@
 package babar.application.ileossa.babar.uploadGallery.Service;
 
+import android.app.Application;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,6 +11,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import babar.application.ileossa.babar.shareData.ShareIntent;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
@@ -23,13 +26,15 @@ import okhttp3.Response;
 
 public class UploadService {
 
-    private static final String BASE_URL = "http://66de0217.ngrok.io/";
+    private static final boolean tryPing = true;
+    private static final String BASE_URL_PING = " http://14717bf0.ngrok.io";
+    private static final String BASE_URL_UPLOAD = BASE_URL_PING + "/v1/upload";
 
     private static final String TAG_UPLOAD_SERVICE = "UPLOAD SERVCIE";
     private static final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/png");
 
     public void uploadFiles(ArrayList<String> selectedItems){
-        Log.d(TAG_UPLOAD_SERVICE, "Ping server " + String.valueOf(pingServer(BASE_URL)));
+        Log.d(TAG_UPLOAD_SERVICE, "Ping server " + String.valueOf(pingServer(BASE_URL_PING)));
         Log.d(TAG_UPLOAD_SERVICE, "toto caca vincent " + selectedItems.toString());
         for (String pathItem : selectedItems){
             String filename = pathItem.substring(pathItem.lastIndexOf("/")+1);
@@ -43,7 +48,8 @@ public class UploadService {
         }
     }
 
-    private boolean pingServer(String urlparam){
+    private String  pingServer(String urlparam){
+        if( tryPing == false){ return "ping desactive, please enable ping to test " + BASE_URL_PING; }
         try {
             URL url = new URL(urlparam);
 
@@ -55,27 +61,32 @@ public class UploadService {
 
             if (urlc.getResponseCode() == 200) {
                 Log.d(TAG_UPLOAD_SERVICE, "getResponseCode == 200");
-                return new Boolean(true);
+                return String.valueOf(new Boolean(true));
             }
         } catch (MalformedURLException e1) {
             e1.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new Boolean(false);
+        return String.valueOf(new Boolean(false));
     }
 
 
     private void uploadImage(File image, String imageName) throws IOException {
-        Log.d(TAG_UPLOAD_SERVICE, "Ping server " + String.valueOf(pingServer(BASE_URL)));
+        Log.d(TAG_UPLOAD_SERVICE, "Ping server " + String.valueOf(pingServer(BASE_URL_PING)));
+        MediaType MEDIA_TYPE = getFileExtension(image).endsWith("png") ? MediaType.parse("image/png") : MediaType.parse("image/jpeg");
+
         OkHttpClient client = new OkHttpClient();
 
-        RequestBody requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM)
-                .addFormDataPart("file", imageName, RequestBody.create(MEDIA_TYPE_PNG, image))
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("files", imageName, RequestBody.create(MEDIA_TYPE, image))
                 .build();
 
-        Request request = new Request.Builder().url(BASE_URL+"/v1/upload")
-                .post(requestBody).build();
+        Request request = new Request.Builder()
+                .url(BASE_URL_UPLOAD)
+                .post(requestBody)
+                .build();
 
         Response response = client.newCall(request).execute();
         if (!response.isSuccessful()) {
@@ -83,5 +94,21 @@ public class UploadService {
             throw new IOException("Unexpected code " + response);
         }
 
+    }
+
+
+    private static String getFileExtension(File file) throws IOException {
+        if (file == null) {
+            throw new IOException("Error load file, can't find extension");
+        }
+        String dotSeparator = ".";
+        String name = file.getName();
+        int extIndex = name.lastIndexOf(dotSeparator);
+
+        if (extIndex == -1) {
+            return "";
+        } else {
+            return name.substring(extIndex + 1);
+        }
     }
 }

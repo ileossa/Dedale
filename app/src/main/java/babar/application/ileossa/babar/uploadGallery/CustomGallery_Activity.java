@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -100,6 +101,7 @@ public class CustomGallery_Activity extends AppCompatActivity implements View.On
                 Log.d("VINCENT3", selectedItems.toString());
 
                 // call service upload files
+                Toast.makeText(CustomGallery_Activity.this, "Start upload", Toast.LENGTH_LONG).show();
                 UploadService uploadService = new UploadService();
                 uploadService.uploadFiles(selectedItems);
 

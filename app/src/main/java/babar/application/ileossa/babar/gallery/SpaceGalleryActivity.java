@@ -25,7 +25,6 @@ import babar.application.ileossa.babar.uploadGallery.UploadGalleryMainActivity;
 /**
  * Created by ileossa on 16/08/2017.
  */
-
 public class SpaceGalleryActivity extends AppCompatActivity{
 
     public BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -34,15 +33,15 @@ public class SpaceGalleryActivity extends AppCompatActivity{
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.navigation_home:
+                case R.id.navigation_gallery:
 //                    mTextMessage.setText(R.string.title_gallery);
 //                    startActivity(new Intent(SpaceGalleryActivity.this, SpaceGalleryActivity.class));
                     return true;
-                case R.id.navigation_dashboard:
+                case R.id.navigation_camera:
 //                    mTextMessage.setText(R.string.title_camera);
                     startActivity(new Intent(SpaceGalleryActivity.this, PhotoIntentActivity.class));
                     return true;
-                case R.id.navigation_notifications:
+                case R.id.navigation_upload:
 //                    mTextMessage.setText(R.string.title_upload);
                     startActivity(new Intent(SpaceGalleryActivity.this, UploadGalleryMainActivity.class));
                     return true;

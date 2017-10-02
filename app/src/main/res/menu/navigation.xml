@@ -2,17 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_gallery"
         android:icon="@drawable/gallery"
         android:title="@string/title_gallery" />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_camera"
         android:icon="@drawable/camera"
-        android:title="@string/title_camera" />
+        android:title="@string/title_camera"
+        android:onClick="doThis"/>
 
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_upload"
         android:icon="@drawable/cloud_upload"
         android:title="@string/title_upload" />
 

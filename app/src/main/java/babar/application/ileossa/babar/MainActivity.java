@@ -6,8 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import babar.application.ileossa.babar.camera.PhotoIntentActivity;
 import babar.application.ileossa.babar.gallery.SpaceGalleryActivity;
+import babar.application.ileossa.babar.json.JSONMain;
 import babar.application.ileossa.babar.shareData.ShareIntent;
 
 
@@ -39,15 +39,24 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        Button showCameraIntent = (Button) findViewById(R.id.btn_show_camera_intent);
-        showCameraIntent.setOnClickListener(new View.OnClickListener() {
+//        Button showCameraIntent = (Button) findViewById(R.id.btn_show_camera_intent);
+//        showCameraIntent.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent cameraActivity = new Intent(MainActivity.this, PhotoIntentActivity.class);
+//                startActivity(cameraActivity);
+//            }
+//        });
+
+
+        Button showJson = (Button) findViewById(R.id.btn_show_json);
+        showJson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent cameraActivity = new Intent(MainActivity.this, PhotoIntentActivity.class);
-                startActivity(cameraActivity);
+                Intent jsonA = new Intent(MainActivity.this, JSONMain.class);
+                startActivity(jsonA);
             }
         });
-
 
     }
 }

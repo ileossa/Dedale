@@ -9,8 +9,7 @@
     <item
         android:id="@+id/navigation_camera"
         android:icon="@drawable/camera"
-        android:title="@string/title_camera"
-        android:onClick="doThis"/>
+        android:title="@string/title_camera"/>
 
     <item
         android:id="@+id/navigation_upload"

@@ -3,6 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     >
     <LinearLayout
         android:orientation="horizontal"
@@ -11,11 +12,6 @@
         >
         <Button android:id="@+id/btnIntend"
             android:text="@string/btnIntend"
-            android:layout_height="wrap_content"
-            android:layout_width="0dp"
-            android:layout_weight="1" />
-        <Button android:id="@+id/btnIntendS"
-            android:text="@string/btnIntendS"
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout_weight="1" />

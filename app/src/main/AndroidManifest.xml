@@ -24,28 +24,55 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppThemeNoTittleBar">
-        <activity android:name=".gallery.SpaceGalleryActivity"  android:theme="@style/AppThemeNoTittleBar">
+        <activity
+            android:name=".gallery.SpaceGalleryActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoTittleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" android:theme="@style/AppThemeNoTittleBar" />
-        <activity android:name=".gallery.SpacePhotoActivity" android:theme="@style/AppThemeNoTittleBar" />
-        <activity android:name=".shareData.ShareIntent" android:theme="@style/AppThemeNoTittleBar" />
-        <activity android:name=".camera.PhotoIntentActivity" android:theme="@style/AppThemeNoTittleBar" />
-        <activity android:name=".uploadGallery.UploadGalleryMainActivity" android:theme="@style/AppThemeNoTittleBar">
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoTittleBar" />
+        <activity
+            android:name=".gallery.SpacePhotoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoTittleBar" />
+        <activity
+            android:name=".shareData.ShareIntent"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoTittleBar" />
+        <activity
+            android:name=".camera.PhotoIntentActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoTittleBar" />
+        <activity
+            android:name=".uploadGallery.UploadGalleryMainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoTittleBar">
             <intent-filter>
-                <!-- Intent filter action for receiving multiple images  -->
+
+                <!-- Intent filter action for receiving multiple images -->
                 <action android:name="android.intent.action.SEND_MULTIPLE" />
+
                 <category android:name="android.intent.category.DEFAULT" />
 
-                <!--  To receive Images set mime type to image -->
+                <!-- To receive Images set mime type to image -->
                 <data android:mimeType="image/*" />
             </intent-filter>
         </activity>
-        <activity android:name=".uploadGallery.CustomGallery_Activity" android:theme="@style/AppThemeNoTittleBar" />
-
+        <activity
+            android:name=".uploadGallery.CustomGallery_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoTittleBar" />
+        <activity
+            android:name=".json.JSONMain"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoTittleBar" />
     </application>
+
 </manifest>

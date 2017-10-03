@@ -1,24 +1,38 @@
 package babar.application.ileossa.babar.gallery;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.Space;
 
 import com.bumptech.glide.Glide;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import babar.application.ileossa.babar.MainActivity;
 import babar.application.ileossa.babar.R;
 import babar.application.ileossa.babar.camera.PhotoIntentActivity;
+import babar.application.ileossa.babar.json.HttpHandler;
 import babar.application.ileossa.babar.uploadGallery.UploadGalleryMainActivity;
 
 
@@ -26,6 +40,11 @@ import babar.application.ileossa.babar.uploadGallery.UploadGalleryMainActivity;
  * Created by ileossa on 16/08/2017.
  */
 public class SpaceGalleryActivity extends AppCompatActivity{
+
+    private String TAG = MainActivity.class.getSimpleName();
+
+    private ProgressDialog progressDialog;
+    private String url = "http://81b125bf.ngrok.io/v1/all";
 
     public BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -61,17 +80,88 @@ public class SpaceGalleryActivity extends AppCompatActivity{
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_images);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(layoutManager);
 
-        SpaceGalleryActivity.ImageGalleryAdapter adapter = new SpaceGalleryActivity.ImageGalleryAdapter(this, SpacePhoto.getSpacePhotos());
-        recyclerView.setAdapter(adapter);
+
+        new GetInfosFromJson().execute();
 
     }
 
+
+
+
+    private class GetInfosFromJson extends AsyncTask<String, String, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // showing progress dialog
+            progressDialog = new ProgressDialog(SpaceGalleryActivity.this);
+            progressDialog.setMessage("Please wait ...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+        }
+
+
+        @Override
+        protected String doInBackground(String... params) {
+            HttpHandler httpHandler = new HttpHandler();
+
+            String jsonStr = httpHandler.makeServiceCall(url);
+            Log.i(TAG, "Response: " + jsonStr);
+            return jsonStr;
+        }
+
+        @Override
+        protected void onPostExecute(String  result) {
+            List<DataInfos> datas = new ArrayList<>();
+            progressDialog.dismiss();
+            if (result != null) {
+                try {
+                    JSONArray jsonArray = new JSONArray(result);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        // Getting JSON Array
+                        JSONObject c = jsonArray.getJSONObject(i);
+
+                        // Storing  JSON item in a Variable
+                        DataInfos dataInfos = new DataInfos();
+                        dataInfos.setId(c.getInt("id"));
+                        dataInfos.setName(c.getString("name"));
+                        dataInfos.setTag(c.getString("tag"));
+                        dataInfos.setClasspath(c.getString("classpath"));
+                        datas.add(dataInfos);
+                    }
+
+                    // Setup and push data to recylerview
+                    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(SpaceGalleryActivity.this, 2);
+                    RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_images);
+                    recyclerView.setHasFixedSize(true);
+                    recyclerView.setLayoutManager(layoutManager);
+
+                    SpaceGalleryActivity.ImageGalleryAdapter adapter = new SpaceGalleryActivity.ImageGalleryAdapter(SpaceGalleryActivity.this, datas);
+                    recyclerView.setAdapter(adapter);
+
+                } catch (JSONException e) {
+                    Log.e("JSONException", e.toString());
+                }
+            }
+
+        }
+    }
+
+
+
+
     private class ImageGalleryAdapter extends RecyclerView.Adapter<ImageGalleryAdapter.MyViewHolder>  {
+
+        private List<DataInfos> listDatasInfos;
+        private Context mContext;
+
+
+        public ImageGalleryAdapter( Context mContext, List<DataInfos> listDatasInfos) {
+            this.listDatasInfos = listDatasInfos;
+            this.mContext = mContext;
+        }
+
 
         @Override
         public ImageGalleryAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -89,21 +179,22 @@ public class SpaceGalleryActivity extends AppCompatActivity{
         @Override
         public void onBindViewHolder(ImageGalleryAdapter.MyViewHolder holder, int position) {
 
-            SpacePhoto spacePhoto = mSpacePhotos[position];
+            DataInfos datasInfo = listDatasInfos.get(position);
             ImageView imageView = holder.mPhotoImageView;
 
             Glide.with(mContext)
-                    .load(spacePhoto.getmUrl())
+                    .load(datasInfo.getClasspath())
                     .placeholder(R.drawable.ic_cloud_off_red)
                     .into(imageView);
         }
 
         @Override
         public int getItemCount() {
-            return (mSpacePhotos.length);
+            return (listDatasInfos.size());
         }
 
-        public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
             public ImageView mPhotoImageView;
 
@@ -119,21 +210,13 @@ public class SpaceGalleryActivity extends AppCompatActivity{
 
                 int position = getAdapterPosition();
                 if(position != RecyclerView.NO_POSITION) {
-                    SpacePhoto spacePhoto = mSpacePhotos[position];
+                    DataInfos dataInfos = listDatasInfos.get(position);
 
                     Intent intent = new Intent(mContext, SpacePhotoActivity.class);
-                    intent.putExtra(SpacePhotoActivity.EXTRA_SPACE_PHOTO, spacePhoto);
+                    intent.putExtra(SpacePhotoActivity.EXTRA_SPACE_PHOTO, dataInfos);
                     startActivity(intent);
                 }
             }
-        }
-
-        private SpacePhoto[] mSpacePhotos;
-        private Context mContext;
-
-        public ImageGalleryAdapter(Context context, SpacePhoto[] spacePhotos) {
-            mContext = context;
-            mSpacePhotos = spacePhotos;
         }
     }
 }

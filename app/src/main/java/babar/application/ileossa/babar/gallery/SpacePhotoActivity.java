@@ -19,7 +19,6 @@ import babar.application.ileossa.babar.R;
 /**
  * Created by ileossa on 16/08/2017.
  */
-
 public class SpacePhotoActivity extends AppCompatActivity{
 
     public static final String EXTRA_SPACE_PHOTO = "SpacePhotoActivity.SPACE_PHOTO";
@@ -32,10 +31,10 @@ public class SpacePhotoActivity extends AppCompatActivity{
         setContentView(R.layout.gallery_activity_photo_detail);
 
         mImageView = (ImageView) findViewById(R.id.image);
-        SpacePhoto spacePhoto = getIntent().getParcelableExtra(EXTRA_SPACE_PHOTO);
+        DataInfos dataInfos = (DataInfos) getIntent().getSerializableExtra(EXTRA_SPACE_PHOTO);
 
         Glide.with(this)
-                .load(spacePhoto.getmUrl())
+                .load(dataInfos.getClasspath())
                 .asBitmap()
                 .error(R.drawable.ic_cloud_off_red)
                 .listener(new RequestListener<String, Bitmap>() {

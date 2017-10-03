@@ -33,6 +33,7 @@
     <string name="title_gallery">Gallery</string>
     <string name="title_camera">Photo</string>
     <string name="title_upload">Upload</string>
+    <string name="refresh">Refresh</string>
 
 
 </resources>

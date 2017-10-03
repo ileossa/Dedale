@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 
 import babar.application.ileossa.babar.gallery.SpaceGalleryActivity;
-import babar.application.ileossa.babar.json.JSONMain;
 import babar.application.ileossa.babar.shareData.ShareIntent;
 
 
@@ -49,14 +48,6 @@ public class MainActivity extends AppCompatActivity {
 //        });
 
 
-        Button showJson = (Button) findViewById(R.id.btn_show_json);
-        showJson.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent jsonA = new Intent(MainActivity.this, JSONMain.class);
-                startActivity(jsonA);
-            }
-        });
 
     }
 }

@@ -12,7 +12,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -27,18 +31,19 @@ import babar.application.ileossa.babar.R;
 import babar.application.ileossa.babar.camera.factory.AlbumStorageDirFactory;
 import babar.application.ileossa.babar.camera.factory.BaseAlbumDirFactory;
 import babar.application.ileossa.babar.camera.factory.FroyoAlbumDirFactory;
+import babar.application.ileossa.babar.gallery.SpaceGalleryActivity;
+import babar.application.ileossa.babar.uploadGallery.UploadGalleryMainActivity;
 
 /**
  * Created by ileossa on 24/09/2017.
  */
 
-public class PhotoIntentActivity extends Activity {
+public class PhotoIntentActivity extends AppCompatActivity {
 
     private static final int ACTION_TAKE_PHOTO_B = 1;
 
     private static final String BITMAP_STORAGE_KEY = "viewbitmap";
     private static final String IMAGEVIEW_VISIBILITY_STORAGE_KEY = "imageviewvisibility";
-    private ImageView mImageView;
     private Bitmap mImageBitmap;
 
     private String mCurrentPhotoPath;
@@ -55,7 +60,10 @@ public class PhotoIntentActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_with_intent);
 
-        mImageView = (ImageView) findViewById(R.id.imageView1);
+        //menu bottom
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
         mImageBitmap = null;
 
         Button picBtn = (Button) findViewById(R.id.btnIntend);
@@ -70,6 +78,37 @@ public class PhotoIntentActivity extends Activity {
             mAlbumStorageDirFactory = new BaseAlbumDirFactory();
         }
     }
+
+
+    /**
+     *  CODE MENU BOTTOM
+     */
+    public BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_gallery:
+//                    mTextMessage.setText(R.string.title_gallery);
+                    startActivity(new Intent(PhotoIntentActivity.this, SpaceGalleryActivity.class));
+                    return true;
+                case R.id.navigation_camera:
+//                    mTextMessage.setText(R.string.title_camera);
+//                    startActivity(new Intent(PhotoIntentActivity.this, PhotoIntentActivity.class));
+                    return true;
+                case R.id.navigation_upload:
+//                    mTextMessage.setText(R.string.title_upload);
+                    startActivity(new Intent(PhotoIntentActivity.this, UploadGalleryMainActivity.class));
+                    return true;
+            }
+            return false;
+        }
+
+    };
+
+
+
 
 
 
@@ -103,11 +142,6 @@ public class PhotoIntentActivity extends Activity {
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         mImageBitmap = savedInstanceState.getParcelable(BITMAP_STORAGE_KEY);
-        mImageView.setImageBitmap(mImageBitmap);
-        mImageView.setVisibility(
-                savedInstanceState.getBoolean(IMAGEVIEW_VISIBILITY_STORAGE_KEY) ?
-                        ImageView.VISIBLE : ImageView.INVISIBLE
-        );
     }
 
 
@@ -187,9 +221,6 @@ public class PhotoIntentActivity extends Activity {
     }
 
     private void setPic() {
-		/* Get the size of the ImageView */
-        int targetW = mImageView.getWidth();
-        int targetH = mImageView.getHeight();
 
 		/* Get the size of the image */
         BitmapFactory.Options bmOptions = new BitmapFactory.Options();
@@ -200,9 +231,6 @@ public class PhotoIntentActivity extends Activity {
 
 		/* Figure out which way needs to be reduced less */
         int scaleFactor = 1;
-        if ((targetW > 0) || (targetH > 0)) {
-            scaleFactor = Math.min(photoW/targetW, photoH/targetH);
-        }
 
 		/* Set bitmap options to scale the image decode target */
         bmOptions.inJustDecodeBounds = false;
@@ -212,9 +240,6 @@ public class PhotoIntentActivity extends Activity {
 		/* Decode the JPEG file into a Bitmap */
         Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
 
-		/* Associate the Bitmap to the ImageView */
-        mImageView.setImageBitmap(bitmap);
-        mImageView.setVisibility(View.VISIBLE);
     }
 
     private void galleryAddPic() {

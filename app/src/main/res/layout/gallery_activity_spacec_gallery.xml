@@ -33,5 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="?android:attr/windowBackground"
+        app:itemIconTint="@color/common_google_signin_btn_text_light_default"
+        app:itemTextColor="@color/common_google_signin_btn_text_light_default"
         app:menu="@menu/navigation" />
 </LinearLayout>

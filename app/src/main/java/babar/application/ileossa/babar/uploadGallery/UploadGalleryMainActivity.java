@@ -7,7 +7,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
@@ -21,6 +24,7 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import java.util.ArrayList;
 
 import babar.application.ileossa.babar.R;
+import babar.application.ileossa.babar.camera.PhotoIntentActivity;
 import babar.application.ileossa.babar.gallery.SpaceGalleryActivity;
 
 
@@ -38,6 +42,10 @@ public class UploadGalleryMainActivity extends AppCompatActivity implements View
         super.onCreate(savedInstanceState);
         setContentView(R.layout.upload_activity_main);
 
+        //menu bottom
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
         initImageLoader(getApplicationContext());
         initViews();
         setListeners();
@@ -54,6 +62,30 @@ public class UploadGalleryMainActivity extends AppCompatActivity implements View
                 break;
         }
     }
+
+
+    public BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_gallery:
+//                    mTextMessage.setText(R.string.title_gallery);
+                    startActivity(new Intent(UploadGalleryMainActivity.this, SpaceGalleryActivity.class));
+                    return true;
+                case R.id.navigation_camera:
+//                    mTextMessage.setText(R.string.title_camera);
+                    startActivity(new Intent(UploadGalleryMainActivity.this, PhotoIntentActivity.class));
+                    return true;
+                case R.id.navigation_upload:
+//                    mTextMessage.setText(R.string.title_upload);
+//                    startActivity(new Intent(UploadGalleryMainActivity.this, UploadGalleryMainActivity.class));
+                    return true;
+            }
+            return false;
+        }
+
+    };
 
 
     //get actual path of uri

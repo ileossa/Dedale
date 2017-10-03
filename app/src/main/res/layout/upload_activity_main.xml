@@ -1,54 +1,73 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#eeeeee"
     android:orientation="vertical"
-    android:padding="5dp">
+    tools:context=".uploadGallery.UploadGalleryMainActivity"
+    >
 
-    <TextView
-        android:layout_width="wrap_content"
+    <FrameLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/mainTitle"
+            android:textColor="#00BCD4"
+            android:textSize="18sp" />
+
+        <!-- Button to Open Custom gallery -->
+        <Button
+            android:id="@+id/openCustomGallery"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="#ffffff"
+            android:text="@string/openCustomGallery"
+            android:textColor="#009688"
+            android:textSize="15sp" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:layout_marginTop="5dp"
+            android:background="#616161" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/selectedImages"
+            android:textColor="#9e9e9e"
+            android:textSize="14sp" />
+
+        <!--  Grid View to display Selected Images-->
+        <include
+            android:id="@+id/selectedImagesGridView"
+            layout="@layout/upload_gridview_layout" />
+
+    </FrameLayout>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="@string/mainTitle"
-        android:textColor="#00BCD4"
-        android:textSize="18sp" />
-
-    <!-- Button to Open Custom gallery -->
-    <Button
-        android:id="@+id/openCustomGallery"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:background="#ffffff"
-        android:text="@string/openCustomGallery"
-        android:textColor="#009688"
-        android:textSize="15sp" />
-
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1px"
-        android:layout_marginTop="5dp"
-        android:background="#616161" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:padding="5dp"
-        android:text="@string/selectedImages"
-        android:textColor="#9e9e9e"
-        android:textSize="14sp" />
-
-    <!--  Grid View to display Selected Images-->
-    <include
-        android:id="@+id/selectedImagesGridView"
-        layout="@layout/upload_gridview_layout" />
-
-
+        android:layout_gravity="bottom"
+        android:background="?android:attr/windowBackground"
+        app:itemIconTint="@color/common_google_signin_btn_text_light_default"
+        app:itemTextColor="@color/common_google_signin_btn_text_light_default"
+        app:menu="@menu/navigation" />
 
 
 </LinearLayout>
